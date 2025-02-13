@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روزمون مبارک عشق قشنگم</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #ffe6f7; /* پس‌زمینه صورتی کمرنگ */
+        }
+        #big-heart {
+            font-size: 250px;
+            color: red;
+            margin-top: 50px;
+            display: none;
+            position: relative;
+        }
+        #big-heart span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            font-weight: bold;
+            color: rgba(88, 5, 5, 0.786);
+            font-family: 'Dancing Script', cursive; /* استفاده از فونت Dancing Script */
+        }
+        #message {
+            font-size: 30px;
+            position: absolute;
+            top: 45%;
+            left: 40%;
+            color: #9C1C32; /* رنگ آلبالویی */
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+        .snowflake, .flower, .bear {
+            position: absolute;
+            top: -50px;
+            animation: fall 5s linear infinite;
+        }
+        .snowflake {
+            color: rgba(195, 7, 126, 0.829);
+            font-size: 20px;
+        }
+        .flower {
+            color: pink;
+            font-size: 25px;
+        }
+        .bear {
+            color: #8B4513; /* رنگ خرس */
+            font-size: 35px;
+        }
+        @keyframes fall {
+            0% {
+                top: -50px;
+            }
+            100% {
+                top: 100vh;
+            }
+        }
+        .heart-fountain {
+            position: absolute;
+            animation: fountain 2s infinite;
+            font-size: 30px;
+        }
+        @keyframes fountain {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        #question-container {
+            margin-top: 20px;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .answer-buttons {
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #yes-button {
+            background-color: #df70ca;
+            color: white;
+        }
+        #no-button {
+            background-color: #ef655b;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="question-container">
+        <div class="question">قول میدی تا آخرش مال هم کنار هم بمونیم؟</div>
+        <div class="answer-buttons">
+            <button id="yes-button" onclick="nextQuestion()">بله</button>
+            <button id="no-button" onclick="escapeNo()">خیر</button>
+        </div>
+    </div>
+
+    <div id="big-heart">
+        ❤️
+        <span>M&S</span>
+    </div>
+
+    <div id="message">
+        <p>😘روزمون مبارک عشق قشنگم</p>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+
+        const questions = [
+            "قول میدی تا آخرش مال هم کنار هم بمونیم؟",
+            "محمدمهدی منیی؟ عاشق فقط منییی؟",
+            " (غذارو تو درست میکنی پولاهم همش مال من باشه هرچیم بگم بگی چشم؟😜؟)هرچی من بگم گوش میکنییی؟"
+            
+        ];
+
+        // نمایش سوال بعدی
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                document.querySelector(".question").textContent = questions[currentQuestion];
+            } else {
+                showCelebration();
+            }
+        }
+
+        // جلوگیری از انتخاب "خیر" و فرار آن
+        function escapeNo() {
+            const noButton = document.getElementById("no-button");
+            const randomX = Math.random() * 80 + 10; // موقعیت تصادفی X
+            const randomY = Math.random() * 80 + 10; // موقعیت تصادفی Y
+            noButton.style.position = "absolute";
+            noButton.style.left = `${randomX}vw`;
+            noButton.style.top = `${randomY}vh`;
+        }
+
+        // شروع به نمایش فواره‌ها و افکت‌ها پس از جواب به سوالات
+        function showCelebration() {
+            document.getElementById("question-container").style.display = "none";
+            document.getElementById("big-heart").style.display = "block";
+            document.getElementById("message").style.display = "block";
+            generateHeartFountains();
+            generateSnowflakesFlowersBears();
+        }
+
+        // فواره‌های قلبی در تمام صفحه
+        function generateHeartFountains() {
+            for (let i = 0; i < 50; i++) {
+                let heartFountain = document.createElement("span");
+                heartFountain.classList.add("heart-fountain");
+                heartFountain.innerText = "❤️";
+                heartFountain.style.left = `${Math.random() * 100}vw`;
+                heartFountain.style.bottom = `${Math.random() * 30 + 10}vh`;
+                document.body.appendChild(heartFountain);
+            }
+        }
+
+        // فوران برف، شکوفه‌ها و خرس‌ها
+        function generateSnowflakesFlowersBears() {
+            // برف‌ها
+            for (let i = 0; i < 50; i++) {
+                let snowflake = document.createElement("span");
+                snowflake.classList.add("snowflake");
+                snowflake.innerText = "❄️";
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(snowflake);
+            }
+
+            // شکوفه‌ها
+            for (let i = 0; i < 20; i++) {
+                let flower = document.createElement("span");
+                flower.classList.add("flower");
+                flower.innerText = "🌸";
+                flower.style.left = `${Math.random() * 100}vw`;
+                flower.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(flower);
+            }
+
+            // خرس‌ها
+            for (let i = 0; i < 20; i++) {
+                let bear = document.createElement("span");
+                bear.classList.add("bear");
+                bear.innerText = "🐻";
+                bear.style.left = `${Math.random() * 100}vw`;
+                bear.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(bear);
+            }
+        }
+    </script>
+    
+</body>
+</html>
